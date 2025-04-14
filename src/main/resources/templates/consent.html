@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Página de consentimiento - Consentimiento requerido</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"></link>
+
+    <script>
+        window.tailwind = {
+          config: {
+            theme: {
+              extend: {
+                fontFamily: {
+                  raleway: ['Raleway', 'sans-serif']
+                }
+              }
+            }
+          }
+        }
+    </script>
+    <script>
+        function cancelConsent() {
+            document.consent_form.reset();
+            document.consent_form.submit();
+        }
+    </script>
+</head>
+<body class="font-[raleway]">
+<div class="flex flex-col h-screen justify-center items-center shadow-md p-10">
+    <div class="flex flex-col justify-center items-center shadow-md p-10">
+        <div class="text-center  text-4xl py-10  text-slate-700">
+            <h1 class="font-bold">Permisos de la aplicación</h1>
+        </div>
+        <div class="text-2xl">
+            <div class="text-center">
+                <p>
+                    La aplicacion
+                    <span class="font-bold text-slate-700" th:text="${clientId}"></span>
+                    quiere acceder a su cuenta
+                    <span class="font-bold" th:text="${principalName}"></span>
+                </p>
+            </div>
+        </div>
+        <div th:if="${userCode}" class="row">
+            <div class="col text-center">
+                <p class="alert alert-warning">
+                    You have provided the code
+                    <span class="fw-bold" th:text="${userCode}"></span>.
+                    Verify that this code matches what is shown on your device.
+                </p>
+            </div>
+        </div>
+        <div class=" text-2xl pb-3">
+            <div class="text-center">
+                <p>
+                    La aplicación anterior solicita los siguientes permisos.<br/>
+                    Por favor revíselos y de su consentimiento si los aprueba.
+                </p>
+            </div>
+        </div>
+        <div class="text-2xl">
+            <div class="text-center">
+                <form name="consent_form" method="post" th:action="${requestURI}">
+                    <input type="hidden" name="client_id" th:value="${clientId}">
+                    <input type="hidden" name="state" th:value="${state}">
+                    <input th:if="${userCode}" type="hidden" name="user_code" th:value="${userCode}">
+
+                    <div th:each="scope: ${scopes}" class="form-check py-1">
+                        <input class="form-check-input"
+                               style="float: none"
+                               type="checkbox"
+                               name="scope"
+                               th:value="${scope.scope}"
+                               th:id="${scope.scope}">
+                        <label class="font-bold px-2" th:for="${scope.scope}" th:text="${scope.scope}"></label>
+                        <p class="text-slate-700 font-bold" th:text="${scope.description}"></p>
+                    </div>
+
+                    <p th:if="${not #lists.isEmpty(previouslyApprovedScopes)}">
+                        You have already granted the following permissions to the above app:
+                    </p>
+                    <div th:each="scope: ${previouslyApprovedScopes}" class="py-1">
+                        <input class="form-check-input"
+                               style="float: none"
+                               type="checkbox"
+                               th:id="${scope.scope}"
+                               disabled
+                               checked>
+                        <label class="font-bold px-2" th:for="${scope.scope}" th:text="${scope.scope}"></label>
+                        <p class="text-slate-700 font-bold" th:text="${scope.description}"></p>
+                    </div>
+
+                    <div class="pt-3">
+                        <button class="text-center py-5 px-5 bg-slate-700 hover:bg-slate-400 text-2xl cursor-pointer rounded-lg text-white" type="submit" id="submit-consent">
+                            Consentir
+                        </button>
+                    </div>
+                    <div class="pt-3">
+                        <button class="text-2xl text-slate-700 hover:underline hover:cursor-pointer" type="button" id="cancel-consent" onclick="cancelConsent();">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="text-2xl">
+            <div class="text-center font-light">
+                <p>
+                    <small>
+                        Se requiere su consentimiento para proporcionar acceso.<br/>
+                        Si no lo apruebas, haz clic en Cancelar, en cuyo caso no se compartira informacion con la aplicacion
+                    </small>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+:root {
+  --font-family: "Raleway", sans-serif;
+}
+boby{
+ font-family: var(--font-family);
+}
