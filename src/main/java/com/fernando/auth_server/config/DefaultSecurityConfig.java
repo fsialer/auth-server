@@ -1,7 +1,7 @@
 package com.fernando.auth_server.config;
 
 import com.fernando.auth_server.federated.FederatedIdentityAuthenticationSuccessHandler;
-import com.fernando.auth_server.federated.UserRepositoryOAuth2UserHandler;
+import com.fernando.auth_server.federated.UserRepositoryOidcUserHandler;
 import com.fernando.auth_server.repository.GoogleUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +26,7 @@ public class DefaultSecurityConfig {
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
             throws Exception {
         FederatedIdentityAuthenticationSuccessHandler successHandler = new FederatedIdentityAuthenticationSuccessHandler();
-        successHandler.setOAuth2UserHandler(new UserRepositoryOAuth2UserHandler(googleUserRepository));
+        successHandler.setOidcUserHandler(new UserRepositoryOidcUserHandler(googleUserRepository));
 
         http
                 .cors(Customizer.withDefaults())

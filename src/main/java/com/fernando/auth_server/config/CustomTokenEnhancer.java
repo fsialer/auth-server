@@ -3,6 +3,7 @@ package com.fernando.auth_server.config;
 import com.fernando.auth_server.dto.CustomUserDetails;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,10 @@ public class CustomTokenEnhancer implements OAuth2TokenCustomizer<JwtEncodingCon
             if (principal.getPrincipal() instanceof CustomUserDetails userDetails) {
                 context.getClaims().claim("user_id", userDetails.getUserIdRandom());
             }
+            if(principal.getPrincipal() instanceof OidcUser oidcUser){
+                context.getClaims().claim("user_id", oidcUser.getAttributes().get("user_id"));
+            }
+
         }
     }
 }
