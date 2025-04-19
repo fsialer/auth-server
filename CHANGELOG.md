@@ -1,18 +1,20 @@
-## [v1.2.0] - 2025-04-19
+## [v1.3.0] - 2025-04-27
 ### 🚀 Features
-* Add new claim user_id in token of google user
-* Add new claim user_id in token
-* Added a column user_id in google_users for an identifier random universal
-* Added a column user_id in users for an identifier random universal
+* Add message broker to send messages to the queue Azure Service Bus.
+## [v1.2.0] - 2025-04-19
+### 🔧 Refactor
+* Add new claim user_id in token for google users y users.
 ## [v1.1.1] - 2025-04-18
 ### 🔧 Refactor
-*  drop code comment and classes don't used
+*  drop code comment and classes don't used.
 ## [v1.1.0] - 2025-04-13
 ### 🚀 Features
-* Add Dockerfile
+* Add Dockerfile.
 ## [v1.0.0] - 2025-04-13
 ### 🚀 Features
-* Projecto básico
-* Authentication Server with consent finish
+* Register clients.
+* Register consents.
+* Register users.
+* Register users google.
 ### 📄 Documentation
 * Create README.md & CHANGELOG.md
