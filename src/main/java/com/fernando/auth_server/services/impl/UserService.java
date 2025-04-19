@@ -1,4 +1,4 @@
-package com.fernando.auth_server.service.impl;
+package com.fernando.auth_server.services.impl;
 
 import com.fernando.auth_server.dto.CreateUserDTO;
 import com.fernando.auth_server.dto.UserDTO;
@@ -8,7 +8,8 @@ import com.fernando.auth_server.enums.RoleName;
 import com.fernando.auth_server.mapper.UserMapper;
 import com.fernando.auth_server.repository.RolRepository;
 import com.fernando.auth_server.repository.UserRepository;
-import com.fernando.auth_server.service.UserCreate;
+import com.fernando.auth_server.services.UserCreate;
+import com.fernando.auth_server.utils.GenerateIdentifier;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,9 @@ public class UserService implements UserCreate {
                 .username(createUserDTO.getUsername())
                 .password(passwordEncoder.encode(createUserDTO.getPassword()))
                 .roles(roles)
+                .userId(GenerateIdentifier.generateIdentifierUser())
                 .build();
+
         return UserMapper.userToUserDTO(userRepository.save(userEntity));
     }
 }

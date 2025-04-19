@@ -1,5 +1,6 @@
 package com.fernando.auth_server.entity;
 
+import com.fernando.auth_server.dto.CustomUserDetails;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,7 +17,7 @@ import java.util.Set;
 @Setter
 @Builder
 @Table(name = "users")
-public class UserEntity implements UserDetails {
+public class UserEntity implements CustomUserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -29,6 +30,8 @@ public class UserEntity implements UserDetails {
     private boolean locked = false;
     private boolean credentialsExpired = false;
     private boolean disabled = false;
+    @Column(name = "user_id")
+    private String userId;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -53,5 +56,10 @@ public class UserEntity implements UserDetails {
     @Override
     public boolean isEnabled() {
         return !disabled;
+    }
+
+    @Override
+    public String getUserIdRandom() {
+        return userId;
     }
 }

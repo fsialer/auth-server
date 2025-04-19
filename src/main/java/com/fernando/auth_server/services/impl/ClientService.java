@@ -1,11 +1,11 @@
-package com.fernando.auth_server.service.impl;
+package com.fernando.auth_server.services.impl;
 
 import com.fernando.auth_server.dto.ClientDTO;
 import com.fernando.auth_server.dto.CreateClientDTO;
 import com.fernando.auth_server.entity.ClientEntity;
 import com.fernando.auth_server.mapper.ClientMapper;
 import com.fernando.auth_server.repository.ClientRepository;
-import com.fernando.auth_server.service.ClientCreate;
+import com.fernando.auth_server.services.ClientCreate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

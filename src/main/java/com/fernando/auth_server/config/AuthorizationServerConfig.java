@@ -1,6 +1,6 @@
 package com.fernando.auth_server.config;
 
-import com.fernando.auth_server.service.impl.RegisteredClientServiceImpl;
+import com.fernando.auth_server.services.impl.RegisteredClientServiceImpl;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;

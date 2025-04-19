@@ -13,12 +13,32 @@ INSERT INTO roles(role) VALUES ('ROLE_USER');
 
 
 ## Variables de entorno
->Se necesitará crear un client en [Google Cloud Plataform (GCP)](https://cloud.google.com/endpoints/docs/frameworks/java/creating-client-ids?hl=es-419#web-client) para obtener los valores de las variables de entorno.
+
 ~~~
-GOOGLE_CLIENT_ID=*******
+DB_HOST= jdbc:postgresql://localhost:5432/db_name
+~~~
+~~~
+DB_USER= ******
+~~~
+~~~
+DB_PASSWORD= ******
+~~~
+~~~
+FRONT_URL= http://localhost:4200
+~~~
+~~~
+FRONT_LOGOUT_URL= http://localhost:4200/logout
+~~~
+~~~
+GOOGLE_CLIENT_ID=******* 
+~~~
+~~~
 GOOGLE_SECRET=*******
+~~~
+~~~
 GOOGLE_CLIENT_NAME=*****
 ~~~
+>Nota: Se necesitará crear un client en [Google Cloud Plataform (GCP)](https://cloud.google.com/endpoints/docs/frameworks/java/creating-client-ids?hl=es-419#web-client) para obtener los valores de las variables de entorno [GOOGLE_CLIENT_ID,GOOGLE_SECRET,GOOGLE_CLIENT_NAME].
 ## Tabla de recursos
 | NOMBRE          | RUTA | PETICION | PARAMETROS | CUERPO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | 
 |-----------------|----------|----------|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -37,8 +57,10 @@ GOOGLE_CLIENT_NAME=*****
 * THYMELEAF
 * GRADLE
 * TAILWINDCSS
+* DOCKER
 
 ## Referencias
 * [Spring Authorizacion Server](https://docs.spring.io/spring-authorization-server/reference/getting-started.html)
 * [Google Cloud Plataform](https://cloud.google.com/endpoints/docs/frameworks/java/creating-client-ids?hl=es-419#web-client)
 * [Tailwindcss](https://tailwindcss.com/)
+* [Changelog](https://github.com/fsialer/auth-server/blob/main/CHANGELOG.md)

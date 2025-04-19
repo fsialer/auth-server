@@ -1,7 +1,9 @@
 package com.fernando.auth_server.config;
 
+import com.fernando.auth_server.dto.CustomUserDetails;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,7 @@ public class CustomTokenEnhancer implements OAuth2TokenCustomizer<JwtEncodingCon
     @Override
     public void customize(JwtEncodingContext context) {
         Authentication principal=context.getPrincipal();
+
         if(context.getTokenType().getValue().equals("id_token")){
             context.getClaims().claim("token_type","id token");
         }
@@ -21,6 +24,14 @@ public class CustomTokenEnhancer implements OAuth2TokenCustomizer<JwtEncodingCon
             context.getClaims().claim("token_type","access token");
             Set<String> roles=principal.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
             context.getClaims().claim("roles",roles).claim("username",principal.getName());
+            // Extraer userId desde tu entidad
+            if (principal.getPrincipal() instanceof CustomUserDetails userDetails) {
+                context.getClaims().claim("user_id", userDetails.getUserIdRandom());
+            }
+            if(principal.getPrincipal() instanceof OidcUser oidcUser){
+                context.getClaims().claim("user_id", oidcUser.getAttributes().get("user_id"));
+            }
+
         }
     }
 }

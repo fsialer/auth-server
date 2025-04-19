@@ -1,7 +1,7 @@
 package com.fernando.auth_server.controller;
 
 import com.fernando.auth_server.dto.CreateClientDTO;
-import com.fernando.auth_server.service.ClientCreate;
+import com.fernando.auth_server.services.ClientCreate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

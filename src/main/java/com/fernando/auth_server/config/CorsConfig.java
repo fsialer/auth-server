@@ -1,5 +1,6 @@
 package com.fernando.auth_server.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -11,6 +12,9 @@ import java.util.List;
 @Configuration
 public class CorsConfig {
 
+    @Value("${client-app.front-url}")
+    private String ORIGIN_FRONT;
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource(){
         UrlBasedCorsConfigurationSource source=new UrlBasedCorsConfigurationSource ();
@@ -18,7 +22,7 @@ public class CorsConfig {
         cors.addAllowedHeader("*");
         cors.addAllowedMethod("*");
         cors.setAllowCredentials(true);
-        cors.setAllowedOrigins(List.of("http://127.0.0.1:4200","http://localhost:4200"));
+        cors.setAllowedOrigins(List.of(ORIGIN_FRONT));
         source.registerCorsConfiguration("/**",cors);
         return source;
     }

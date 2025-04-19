@@ -31,7 +31,8 @@ spring:
           google:
             user-name-attribute: email
 client-app:
-  url: ${CLIENT_URL:http://localhost:8090}
+  front-url: ${FRONT_URL:http://localhost:4200}
+  front-logout-url: ${FRONT_LOGOUT_URL:http://localhost:4200/logout}
 
 auth-service:
   url: ${AUTH_SERVER:http://localhost:9000}

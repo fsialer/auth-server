@@ -1,4 +1,4 @@
-package com.fernando.auth_server.service.impl;
+package com.fernando.auth_server.services.impl;
 
 import com.fernando.auth_server.entity.AuthorizationConsent;
 import com.fernando.auth_server.repository.AuthorizationConsentRepository;
@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsent;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
@@ -73,7 +75,6 @@ public class JpaOAuth2AuthorizationConsentService implements OAuth2Authorization
             authorities.add(authority.getAuthority());
         }
         entity.setAuthorities(StringUtils.collectionToCommaDelimitedString(authorities));
-
         return entity;
     }
 }
