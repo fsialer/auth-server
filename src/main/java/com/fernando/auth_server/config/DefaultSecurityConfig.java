@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
 @Configuration
 @RequiredArgsConstructor
@@ -19,7 +18,6 @@ public class DefaultSecurityConfig {
     private static final String ASSET_URI="/assets/**";
     private static final String LOGOUT_URI="http://localhost:4200/logout";
     private static final String CLIENT_URI="/client/**";
-    private static final String LOGIN_ERROR_URI="/login?error";
     private final GoogleUserRepository googleUserRepository;
 
     @Bean
@@ -39,8 +37,6 @@ public class DefaultSecurityConfig {
                 .formLogin(
                         formLogin->
                                 formLogin.loginPage(LOGIN_URI)
-
-                //                        .Customizer.withDefaults()
                 )
                 .oauth2Login(oauth->oauth
                         .loginPage(LOGIN_URI)

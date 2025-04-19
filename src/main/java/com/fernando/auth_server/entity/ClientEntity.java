@@ -34,23 +34,20 @@ public class ClientEntity {
     @Column(name = "authentication_method")
     private Set<String> authenticationMethods;
 
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    private Set<ClientAuthenticationMethod> clientAuthenticationMethods;
-
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "oauth2_client_grants", joinColumns = @JoinColumn(name = "client_id"))
     @Column(name = "grant_type")
     private Set<String> grantTypes;
 
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    private Set<AuthorizationGrantType> authorizationGrantTypes;
-
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> redirectUris;
+
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> postLogoutRedirectUris;
+
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> scopes;
+
     private ClientSettings clientSettings;
     private TokenSettings tokenSettings;
     private boolean requireProofKey;

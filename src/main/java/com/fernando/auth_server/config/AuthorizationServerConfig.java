@@ -1,6 +1,5 @@
 package com.fernando.auth_server.config;
 
-import com.fernando.auth_server.repository.GoogleUserRepository;
 import com.fernando.auth_server.service.impl.RegisteredClientServiceImpl;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -8,6 +7,7 @@ import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -17,9 +17,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.server.authorization.InMemoryOAuth2AuthorizationConsentService;
 import org.springframework.security.oauth2.server.authorization.InMemoryOAuth2AuthorizationService;
-import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
@@ -39,6 +37,8 @@ import java.util.UUID;
 public class AuthorizationServerConfig {
     private final RegisteredClientServiceImpl registeredClientService;
     private static final String CUSTOM_CONSENT_PAGE="/oauth2/consent";
+    @Value("${auth-service.url}")
+    private String authUri;
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -104,16 +104,11 @@ public class AuthorizationServerConfig {
 
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
-        return AuthorizationServerSettings.builder().issuer("http://localhost:9000").build();
+        return AuthorizationServerSettings.builder().issuer(this.authUri).build();
     }
 
     @Bean
     public OAuth2AuthorizationService authorizationService() {
         return new InMemoryOAuth2AuthorizationService();
     }
-
-//    @Bean
-//    public OAuth2AuthorizationConsentService authorizationConsentService() {
-//        return new InMemoryOAuth2AuthorizationConsentService();
-//    }
 }
