@@ -29,6 +29,8 @@ public class UserEntity implements UserDetails {
     private boolean locked = false;
     private boolean credentialsExpired = false;
     private boolean disabled = false;
+    @Column(name = "user_id")
+    private String userId;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

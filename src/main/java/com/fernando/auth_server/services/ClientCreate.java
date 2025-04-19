@@ -1,4 +1,4 @@
-package com.fernando.auth_server.service;
+package com.fernando.auth_server.services;
 
 import com.fernando.auth_server.dto.ClientDTO;
 import com.fernando.auth_server.dto.CreateClientDTO;

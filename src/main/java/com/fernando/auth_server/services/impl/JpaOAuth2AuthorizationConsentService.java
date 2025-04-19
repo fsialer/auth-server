@@ -1,4 +1,4 @@
-package com.fernando.auth_server.service.impl;
+package com.fernando.auth_server.services.impl;
 
 import com.fernando.auth_server.entity.AuthorizationConsent;
 import com.fernando.auth_server.repository.AuthorizationConsentRepository;
