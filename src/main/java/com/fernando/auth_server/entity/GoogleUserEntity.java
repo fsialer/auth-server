@@ -1,5 +1,6 @@
 package com.fernando.auth_server.entity;
 
+import com.fernando.auth_server.utils.GenerateIdentifier;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -20,6 +21,8 @@ public class GoogleUserEntity {
     private String givenName;
     private String familyName;
     private String pictureUrl;
+    @Column(name = "user_id")
+    private String userId;
 
     public static GoogleUserEntity fromOauth2User(OAuth2User user){
        return GoogleUserEntity.builder()
@@ -28,6 +31,7 @@ public class GoogleUserEntity {
                 .givenName(user.getAttributes().get("given_name").toString())
                 //.familyName(user.getAttributes().get("family_name").toString())
                 .pictureUrl(user.getAttributes().get("picture").toString())
+               .userId(GenerateIdentifier.generateIdentifierUser())
                 .build();
     }
 }
