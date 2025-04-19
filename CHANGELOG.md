@@ -1,3 +1,9 @@
+## [v1.2.0] - 2025-04-19
+### 🚀 Features
+* Add new claim user_id in token of google user
+* Add new claim user_id in token
+* Added a column user_id in google_users for an identifier random universal
+* Added a column user_id in users for an identifier random universal
 ## [v1.1.1] - 2025-04-18
 ### 🔧 Refactor
 *  drop code comment and classes don't used
