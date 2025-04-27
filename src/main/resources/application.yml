@@ -30,6 +30,12 @@ spring:
         provider:
           google:
             user-name-attribute: email
+  cloud:
+    azure:
+      servicebus:
+        connection-string: ${AZURE_SERVICEBUS_CONNECTION_STRING:CONNECTION_STRING}
+        queue-name: ${AZURE_SERVICEBUS_QUEUE_NAME:queue_user}
+        entity-type: queue
 client-app:
   front-url: ${FRONT_URL:http://localhost:4200}
   front-logout-url: ${FRONT_LOGOUT_URL:http://localhost:4200/logout}

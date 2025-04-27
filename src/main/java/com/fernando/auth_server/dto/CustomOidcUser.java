@@ -26,7 +26,6 @@ public class CustomOidcUser implements OidcUser {
         return attributes;
     }
 
-    // Delegar todos los demás métodos a delegate
     @Override public Collection<? extends GrantedAuthority> getAuthorities() { return delegate.getAuthorities(); }
     @Override public String getName() { return delegate.getName(); }
     @Override public OidcIdToken getIdToken() { return delegate.getIdToken(); }
