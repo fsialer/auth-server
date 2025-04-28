@@ -3,6 +3,7 @@ package com.fernando.auth_server.config;
 import com.fernando.auth_server.federated.FederatedIdentityAuthenticationSuccessHandler;
 import com.fernando.auth_server.federated.UserRepositoryOidcUserHandler;
 import com.fernando.auth_server.repository.GoogleUserRepository;
+import com.fernando.auth_server.services.impl.ServicesBusSenderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -21,12 +22,13 @@ public class DefaultSecurityConfig {
     private String LOGOUT_URI;
     private static final String CLIENT_URI="/client/**";
     private final GoogleUserRepository googleUserRepository;
+    private final ServicesBusSenderService servicesBusSenderService;
 
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
             throws Exception {
         FederatedIdentityAuthenticationSuccessHandler successHandler = new FederatedIdentityAuthenticationSuccessHandler();
-        successHandler.setOidcUserHandler(new UserRepositoryOidcUserHandler(googleUserRepository));
+        successHandler.setOidcUserHandler(new UserRepositoryOidcUserHandler(googleUserRepository,servicesBusSenderService));
 
         http
                 .cors(Customizer.withDefaults())
