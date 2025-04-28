@@ -1,3 +1,6 @@
+## [v1.3.1] - 2025-04-28
+### 🐛 Bug
+* bugfix about sending messages to the queue.
 ## [v1.3.0] - 2025-04-27
 ### 🚀 Features
 * Add message broker to send messages to the queue Azure Service Bus.
