@@ -1,3 +1,6 @@
+## [v1.3.3] - 2025-04-28
+### 🦺 Security
+* Update dependencies [com.azure:azure-messaging-servicebus:7.17.7]  to [com.azure:azure-messaging-servicebus:7.17.9] to fix vulnerabilities.
 ## [v1.3.2] - 2025-04-28
 ### 🦺 Security
 * Update dependencies [com.azure:azure-messaging-servicebus:7.15.0]  to [com.azure:azure-messaging-servicebus:7.17.7] to fix vulnerabilities.
