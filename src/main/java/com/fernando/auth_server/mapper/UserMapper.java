@@ -9,6 +9,8 @@ import java.util.Set;
 
 public class UserMapper {
 
+    private UserMapper(){}
+
     public static UserDTO userToUserDTO(UserEntity user){
         return UserDTO.builder()
                 .id(user.getId())

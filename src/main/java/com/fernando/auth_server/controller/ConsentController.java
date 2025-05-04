@@ -26,10 +26,9 @@ public class ConsentController {
     public String consent(Principal principal, Model model,
                           @RequestParam(OAuth2ParameterNames.CLIENT_ID) String clientId,
                           @RequestParam(OAuth2ParameterNames.SCOPE) String scope,
-                          @RequestParam(OAuth2ParameterNames.STATE) String state
-                          //@RequestParam(name = OAuth2ParameterNames.USER_CODE, required = false) String userCode
+                          @RequestParam(OAuth2ParameterNames.STATE) String state,
+                          @RequestParam(name = OAuth2ParameterNames.USER_CODE, required = false) String userCode
     ) {
-
         // Remove scopes that were already approved
         Set<String> scopesToApprove = new HashSet<>();
         Set<String> previouslyApprovedScopes = new HashSet<>();
@@ -58,12 +57,12 @@ public class ConsentController {
         model.addAttribute("scopes", withDescription(scopesToApprove));
         model.addAttribute("previouslyApprovedScopes", withDescription(previouslyApprovedScopes));
         model.addAttribute("principalName", principal.getName());
-        //model.addAttribute("userCode", userCode);
-//        if (StringUtils.hasText(userCode)) {
-//            model.addAttribute("requestURI", "/oauth2/device_verification");
-//        } else {
-        model.addAttribute("requestURI", "/oauth2/authorize");
-//        }
+        model.addAttribute("userCode", userCode);
+        if (StringUtils.hasText(userCode)) {
+            model.addAttribute("requestURI", "/oauth2/device_verification");
+        } else {
+            model.addAttribute("requestURI", "/oauth2/authorize");
+        }
 
         return "consent";
     }

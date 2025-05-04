@@ -58,7 +58,7 @@ public class UserService implements UserCreate, UserRegister {
         Set<RolEntity> roles = new HashSet<>();
         String userId=GenerateIdentifier.generateIdentifierUser();
         RolEntity role = rolRepository.findByRole(RoleName.ROLE_USER)
-                .orElseThrow(()->new RolNotFoundException());
+                .orElseThrow(RolNotFoundException::new);
         roles.add(role);
         return UserMapper.userToUserDTO(userRepository.save(UserMapper.toUserEntity(createUserDTO,roles,userId)));
     }

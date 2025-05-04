@@ -14,9 +14,7 @@ public class RegisteredClientServiceImpl implements RegisteredClientRepository {
     private final ClientRepository clientRepository;
     private final PasswordEncoder passwordEncoder;
     @Override
-    public void save(RegisteredClient registeredClient) {
-
-    }
+    public void save(RegisteredClient registeredClient) {}
 
     @Override
     public RegisteredClient findById(String id) {

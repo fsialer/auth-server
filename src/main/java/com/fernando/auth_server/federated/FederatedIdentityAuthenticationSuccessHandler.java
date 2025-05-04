@@ -16,9 +16,9 @@ import java.util.function.Consumer;
 public final  class FederatedIdentityAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     private final AuthenticationSuccessHandler delegate = new SavedRequestAwareAuthenticationSuccessHandler();
 
-    private Consumer<OAuth2User> oauth2UserHandler = (user) -> {};
+    private Consumer<OAuth2User> oauth2UserHandler = user -> {};
 
-    private Consumer<OidcUser> oidcUserHandler = (user) -> this.oauth2UserHandler.accept(user);
+    private Consumer<OidcUser> oidcUserHandler = user -> this.oauth2UserHandler.accept(user);
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {

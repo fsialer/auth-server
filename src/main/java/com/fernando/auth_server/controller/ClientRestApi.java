@@ -1,5 +1,6 @@
 package com.fernando.auth_server.controller;
 
+import com.fernando.auth_server.dto.ClientDTO;
 import com.fernando.auth_server.dto.CreateClientDTO;
 import com.fernando.auth_server.services.ClientCreate;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class ClientRestApi {
     private final ClientCreate clientCreate;
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody CreateClientDTO dto){
+    public ResponseEntity<ClientDTO> create(@RequestBody CreateClientDTO dto){
         return ResponseEntity.status(HttpStatus.CREATED).body(clientCreate.create(dto));
     }
 
