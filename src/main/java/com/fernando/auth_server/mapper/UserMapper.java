@@ -41,6 +41,8 @@ public class UserMapper {
                 .lastNames(createRequestUserDTO.getProfile().getLastNames())
                 .email(userResponseDTO.username())
                 .userId(userResponseDTO.userId())
+                .birth(createRequestUserDTO.getProfile().getBirth())
+                .sex(createRequestUserDTO.getProfile().getSex())
                 .build();
     }
 
