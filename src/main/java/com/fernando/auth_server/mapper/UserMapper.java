@@ -9,6 +9,8 @@ import java.util.Set;
 
 public class UserMapper {
 
+    private UserMapper(){}
+
     public static UserDTO userToUserDTO(UserEntity user){
         return UserDTO.builder()
                 .id(user.getId())
@@ -39,6 +41,8 @@ public class UserMapper {
                 .lastNames(createRequestUserDTO.getProfile().getLastNames())
                 .email(userResponseDTO.username())
                 .userId(userResponseDTO.userId())
+                .birth(createRequestUserDTO.getProfile().getBirth())
+                .sex(createRequestUserDTO.getProfile().getSex())
                 .build();
     }
 

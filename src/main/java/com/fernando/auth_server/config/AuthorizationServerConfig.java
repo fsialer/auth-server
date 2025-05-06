@@ -50,18 +50,18 @@ public class AuthorizationServerConfig {
         http
                 .cors(Customizer.withDefaults())
                 .securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
-                .with(authorizationServerConfigurer, (authorizationServer) ->
+                .with(authorizationServerConfigurer, authorizationServer ->
                         authorizationServer
                                 .authorizationEndpoint(auth->auth.consentPage(CUSTOM_CONSENT_PAGE))
                                 .oidc(Customizer.withDefaults())	// Enable OpenID Connect 1.0
                 )
-                .authorizeHttpRequests((authorize) ->
+                .authorizeHttpRequests(authorize ->
                         authorize
                                 .anyRequest().authenticated()
                 )
                 // Redirect to the login page when not authenticated from the
                 // authorization endpoint
-                .exceptionHandling((exceptions) -> exceptions
+                .exceptionHandling(exceptions -> exceptions
                         .defaultAuthenticationEntryPointFor(
                                 new LoginUrlAuthenticationEntryPoint("/login"),
                                 new MediaTypeRequestMatcher(MediaType.TEXT_HTML)

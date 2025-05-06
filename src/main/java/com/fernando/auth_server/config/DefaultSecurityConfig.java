@@ -32,7 +32,7 @@ public class DefaultSecurityConfig {
 
         http
                 .cors(Customizer.withDefaults())
-                .authorizeHttpRequests((authorize) -> authorize
+                .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(AUTH_URI,CLIENT_URI,ASSET_URI,LOGIN_URI).permitAll()
                         .anyRequest().authenticated()
                 )
